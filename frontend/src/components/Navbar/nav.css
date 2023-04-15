@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    align-items: center;
+    padding: 6px;
+    
+}
+.navbar a{
+    border-radius: 5px;
+    padding: 5px;
+    color: black;
+    text-emphasis-color: black;
+    text-decoration: none;
+    padding: 8px;
+    font-size: 20px;
+}
+.navbar a:hover{
+    color: white;
+    background-color: #4CAF50;
+}
+.navbar a:active{
+    opacity: 0.8;
+}
+
+li{
+    list-style-type: none;
+    display: inline-block;
+    margin: 10px; 
+}
+ul{
+    display: inline;
+    
+}

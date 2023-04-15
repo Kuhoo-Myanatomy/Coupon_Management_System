@@ -1,0 +1,6 @@
+export const GET_COUPONS='GET_COUPONS';
+export const CREATE_COUPON='CREATE_COUPON';
+export const UPDATE_COUPON='UPDATE_COUPON';
+export const DELETE_COUPON='DELETE_COUPON';
+
+export const CREATE_USER='CREATE_USER';
