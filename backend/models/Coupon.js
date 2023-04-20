@@ -1,6 +1,12 @@
 const mongoose=require('mongoose');
-var add=30*24*60*60*1000;
-
+const moment=require('moment');
+// var add=30*24*60*60*1000;
+var date = new Date().getTime(); // Now
+// date.setDate(date.getDate() + 30); // Set now + 30 days as the new date
+// console.log(date);
+// db.coupons.find({staus:"active"},{coupontype:1})_id
+// date=date.getTime()
+var dateformat=moment(date,'DD-MM-YYYY');
 const CouponSchema=new mongoose.Schema({
     couponCode:{
         type:String,
@@ -11,10 +17,10 @@ const CouponSchema=new mongoose.Schema({
     //     type:String,
     //     required:true
     // },
-    status:{
-        type:String,
-        default:"Active",
-    },
+    // status:{
+    //     type:String,
+    //     default:"Active",
+    // },
     // minamount:{
     //     type:Number,
     //     default:1000,
@@ -31,12 +37,16 @@ const CouponSchema=new mongoose.Schema({
     issueDate:{
         type:Date,
         required:true,
-        default:Date.now
+        // default:Date.now
+        default:dateformat
     },
     expiryDate:{
         type:Date,
         required:true,
-        default:Date.now
+        // default:date,
+        default:dateformat
+        
+        // default:Date.today().add(30).days()
         // $dateAdd:
         //     {
         //         startDate: "$issueDate",
@@ -53,5 +63,13 @@ const CouponSchema=new mongoose.Schema({
         required:true,
     }
 });
-
+// CouponSchema.pre('save',function(next){
+//     console.log("pre..");
+//     console.log(this.expiryDate);
+//     var date = new Date();
+//     date.setDate(date.getDate() + 30);
+//     this.expiryDate=date;
+//     next();
+    
+// });
 module.exports=mongoose.model("Coupon",CouponSchema);

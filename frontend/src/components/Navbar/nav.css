@@ -25,6 +25,8 @@
 }
 .navbar a:active{
     opacity: 0.8;
+    background-color: #4CAF50;
+    color: white;
 }
 
 li{
@@ -35,4 +37,9 @@ li{
 ul{
     display: inline;
     
+}
+.active-tab {
+    color: white;
+    background-color: #4CAF50;
+   
 }

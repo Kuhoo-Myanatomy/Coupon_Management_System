@@ -1,9 +1,10 @@
 import {
-    GET_COUPONS,CREATE_COUPON,UPDATE_COUPON,DELETE_COUPON
+    GET_COUPONS,CREATE_COUPON,UPDATE_COUPON,DELETE_COUPON, GET_COUPON_BY_ID
 } from '../actions/types';
 
 const initialState={
-    coupons:[]
+    coupons:[],
+    details:null,
 }
 
 const couponReducer=(state=initialState,action)=>{
@@ -20,9 +21,10 @@ const couponReducer=(state=initialState,action)=>{
         }
         case CREATE_COUPON:{
             console.log(state,action);
+            
             return {
                 ...state,
-                coupons:[...state.coupons,action.payload] 
+                coupons:[action.payload, ...state.coupons]  
             }
         }
         case DELETE_COUPON:{
@@ -37,11 +39,20 @@ const couponReducer=(state=initialState,action)=>{
             console.log(state,action);
            const newarr=state.coupons.map((p) =>p.id === action.payload.id ? action.payload : p)
            console.log("hello",newarr);
-            initialState.coupons=newarr;
+
+            // initialState.coupons=[];
             return {
                 ...state,
                 coupons:newarr
                 
+            }
+        }
+        case GET_COUPON_BY_ID:{
+            console.log(state,action);
+            console.log("Details:",payload.details);
+            return{
+                ...state,
+                details:payload.details
             }
         }
         default:

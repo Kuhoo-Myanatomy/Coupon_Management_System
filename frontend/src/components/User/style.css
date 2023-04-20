@@ -6,7 +6,11 @@
     align-items: center;   
 }
  
-
+.logout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 form{
     max-width: 500px;
     width: 300px;
@@ -43,8 +47,9 @@ form input{
     content:"*"; 
     color: red;
 }
-.user form button{
+form button{
     margin: auto;
+    margin-top: 15px;
     display: block;
     width: 80%;
     background-color: #4CAF50;
@@ -57,12 +62,19 @@ form input{
     
 }
 
-.user form button:hover {
+form button:hover {
     background-color: #3e8e41;
 }
 
+form sup{
+    color: red;
+}
 
-
+form p{
+    color: red;
+    font-size: 12px;
+    font-weight:500;
+}
 
 
 

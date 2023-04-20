@@ -1,7 +1,8 @@
-import { CREATE_USER } from "../actions/types";
+import { CREATE_USER, LOGIN_USER } from "../actions/types";
 
 const initialUsers={
-    users:[]
+    users:[],
+    error: null
 }
 
 export const userReducer=(state=initialUsers,action)=>{
@@ -12,6 +13,11 @@ export const userReducer=(state=initialUsers,action)=>{
             return{
                 ...state,
                 users:[...state.users,action.payload]
+            }
+        }
+        case LOGIN_USER:{
+            return{
+                ...state,
             }
         }
         default:

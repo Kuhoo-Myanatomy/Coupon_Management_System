@@ -1,13 +1,19 @@
 const jwt=require("jsonwebtoken");
 const secret="secret@123";
 
+// req.userInfo = {
+//     email: // email,
+//     username: // username
+// };
 
 const verifyLogin=async(req,res,next)=>{
+    
     const {authorization}=req.headers;
     if(!authorization){
         console.log("Token not found");
-        res.status(400).json({message:"Token not found...Unauthorised Access"});
+        return res.status(400).json({message:"Token not found...Unauthorised Access"});
     }
+    try{
     const split=authorization.split(" ");
     if(split.length!=2){
         console.log("Invalid Token");
@@ -16,7 +22,7 @@ const verifyLogin=async(req,res,next)=>{
     const token=split[1];
     // console.log(req.body);
     // console.log(authorization,split,token);
-    try{
+    // try{
         jwt.verify(token,secret);
         console.log("Authenticated User Logged In.......");
         // res.status(200).json({status:"success",message:"Welcome ...."});

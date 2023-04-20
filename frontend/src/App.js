@@ -3,13 +3,16 @@ import './App.css';
 import React,{ Component } from 'react';
 import {Switch, Route} from 'react-router-dom';
 
-import AddCoupon from './components/Add/index';
-import Coupon from './components/CouponCard/index';
+import AddCoupon from './components/AddCoupon/index';
+// import Coupon from './components/CouponCard/index';
+import Card from './components/Card/index';
 import Error from './components/Error';
-import Login from './components/User/Login';
+import Login from './components/User/Login/index';
+import Logout from './components/User/Logout';
 import SignUp from './components/User/SignUp/index';
 import Show from './components/ShowCoupons/index';
 import Home from './components/Home/Home';
+import Edit from './components/Edit/index';
 import Nav from './components/Navbar/Nav';
 
 // const PrivateRoute=({component:Component,isAutheticated, ...rest})=>(
@@ -22,33 +25,19 @@ import Nav from './components/Navbar/Nav';
 // );
 
 class App extends Component{
-  // constructor(props){
-  //   super(props);
-  //   this.state={
-  //     isAuthenticated:true,
-  //   };
-  // }
-  // handleLogin(){
-  //   this.setState({
-  //     isAuthenticated:true
-  //   });
-  // }
-  // handleLogout(){
-  //   this.setState({
-  //     isAuthenticated:false
-  //   });
-  // }
+
   render(){
-    // const {isAuthenticated}=this.state;
     return(
+
       <div>
         <Nav></Nav>
         <Switch>
-          
           <Route exact path='/' component={Home}></Route>
-          <Route exact path='/coupon' component={Coupon}></Route>
+          <Route exact path='/coupon/:_id' component={Card}></Route>
+          <Route exact path='/edit/:_id' component={Edit}></Route>
           <Route exact path='/coupons' component={Show}></Route>
           <Route exact path='/login' component={Login}></Route>
+          <Route exact path='/logout' component={Logout}></Route>
           <Route exact path='/signup' component={SignUp}></Route>
           <Route exact path='/add' component={AddCoupon}></Route>
           <Route component={Error}></Route>

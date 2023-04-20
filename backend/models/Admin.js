@@ -18,7 +18,7 @@ const UserSchema=new mongoose.Schema({
     },
     password:{
         type:String,
-        required:[true,"Please enter ypur password"],
+        required:[true,"Please enter your password"],
         minlength:8
     },
     coupons:[{

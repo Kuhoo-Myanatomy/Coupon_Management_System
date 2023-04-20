@@ -1,94 +1,71 @@
 import React, {Component} from "react";
 import './card.css'
 import PropTypes from 'prop-types';
-import Add from '../Add/index';
-import DialogCard from "../DialogCard/DialogCard";
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Link } from "react-router-dom";
+import { Dialog, DialogTitle, DialogActions,DialogContent } from "@mui/material";
 class Coupon extends Component{
     constructor(props){
-        super(props)
-        
+        super(props)      
         this.state={
-            couponCode:'default',
-            discount:0,
+            couponCode:'',
+            discount:'',
             issueDate:'',
             expiryDate:'',
-            // showMyComponent: false,
+            showMyComponent: false,
             update:false,
-            isDialogOpen:false
-
+            isDialogOpen:false,
+            showDialog:false,
         }
     }
-    handleDialog=()=>{
-        const {isDialogOpen}=this.state;
-        this.setState({isDialogOpen:!isDialogOpen});
+    handleShowDialog = () => {
+        this.setState({ showDialog: true });
     }
-    // handleShowButton=(val)=>{
-    //     this.setState({showMyComponent:val}) 
-    // }
+    
+    handleCloseDialog = () => {
+        this.setState({ showDialog: false });
+    }
     handleEditButton=(val)=>{
         this.setState({update:true})    
     }
     handleDelete=()=>{
+        this.setState({ showDialog: false });
         console.log("Delete",this.props);
         console.log(this.props._id);
         this.props.deleteCoupon(this.props._id);
+        toast.success("Coupon Deleted Successfully");
     }
+    
     render(){
-        // console.log(this.props);
-        
-        // const showMyComponent=this.state
-        // const{_id,couponCode,discount,issueDate,expiryDate}=this.props;
-        const{_id,couponCode,discount,issueDate,expiryDate}=this.props;
+        const{_id,couponCode,discount}=this.props;
+        const show=false,update=true;
 
-        let dateObj = new Date(issueDate);
-        let day = dateObj.getUTCDate().toString().padStart(2, "0");
-        let month = (dateObj.getUTCMonth() + 1).toString().padStart(2, "0");
-        let year = dateObj.getUTCFullYear().toString();
-        const formattedissueDate = `${day}/${month}/${year}`;
-        // console.log(formattedissueDate);
         
-        dateObj = new Date(expiryDate);
-        day = dateObj.getUTCDate().toString().padStart(2, "0");
-        month = (dateObj.getUTCMonth() + 1).toString().padStart(2, "0");
-        year = dateObj.getUTCFullYear().toString();
-        const formattedexpiryDate = `${day}/${month}/${year}`;
-        // console.log(formattedexpiryDate);
-        // if(showMyComponent)
-        //     console.log('hell0');
-            // console.log(this.props.location.state);
-        const {isDialogOpen}=this.state;
         return(
-            // key={couponCode.id}
-            <div>
-            {this.state.update?<Add _id={_id}
-            couponCode={couponCode} 
-            discount={discount} 
-            issueDate={issueDate} 
-            expiryDate={expiryDate}
-            eupdate={true}
-            ></Add>:
             <div className="card-box" >
+            <ToastContainer />
                 <div className="container">
-                    <h3>Couponcode:   <pre>  {couponCode}</pre></h3>
-                    <h4>Discount: <span>{discount}</span></h4>
-                    <h4>Issuedate: <span>{formattedissueDate}</span></h4>
-                    <h4>Expirydate: <span>{formattedexpiryDate}</span></h4>
-                    
+                    <h3>    {couponCode}</h3>
+                    {/* <h3>Couponcode:   <pre>  {couponCode}</pre></h3> */}
+                    <h4><span> &#8377; {discount}</span></h4>
 
                 <div className="btn">
-                <button onClick={this.handleShowButton} >Show</button>
-                    {/* <button><Link to="/add">Update</Link></button> */}
-                    <button onClick={this.handleEditButton} >Update</button>
+                <Link to={`/coupon/${_id}?update=${show}`}><button style={{width: "50px"}} title="Show"><i class="fa fa-eye"></i>  </button></Link>
+                <Link to={`/coupon/${_id}?update=${update}`}><button style={{width: "50px"}} title="Update"><i class="fa fa-pencil"></i>  </button></Link>
+
+                <button title="Delete" style={{width: "50px"}} onClick={this.handleShowDialog}><i class="fa fa-trash" ></i></button>
+                <Dialog open={this.state.showDialog} onClose={this.handleCloseDialog}>
+                <DialogTitle>Confirm Delete</DialogTitle>
+                <DialogContent>Are you sure you want to delete?</DialogContent>
+                <DialogActions>
+                    <button onClick={this.handleCloseDialog}>Cancel</button>
                     <button onClick={this.handleDelete}>Delete</button>
+                </DialogActions>
+                </Dialog>
                 </div>
-                {/* {isDialogOpen===true?
-                <DialogCard ></DialogCard>
-                :null} */}
             </div>
             </div>
-            }
-        </div>
         )
     }
 }
