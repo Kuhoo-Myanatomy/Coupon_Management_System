@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Coupon Component Matching Coupon's snapshot 1`] = `ShallowWrapper {}`;
